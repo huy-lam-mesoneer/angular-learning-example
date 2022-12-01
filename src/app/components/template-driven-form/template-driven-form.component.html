@@ -1,0 +1,93 @@
+<div class="container">
+  <div class="container__register-control">
+    <form novalidate #signInForm1="ngForm" class="sign-in-form" (submit)="onSubmit1(signInForm1)">
+      <h2>
+        Sign in <br>
+        <em>Using ngModel to register form control</em>
+      </h2>
+      <div class="row-control">
+        <mat-form-field appearance="outline">
+          <mat-label>Username</mat-label>
+          <input matInput placeholder="Username" ngModel name="username"/>
+        </mat-form-field>
+      </div>
+      <div class="row-control">
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input type="password" matInput placeholder="Password" ngModel ngModel name="password"/>
+        </mat-form-field>
+      </div>
+      <div class="row-control">
+        <mat-checkbox ngModel name="rememberMe">Remember me</mat-checkbox>
+      </div><br>
+      <div class="row-control row-actions">
+        <button mat-raised-button color="primary" type="submit">Sign in</button>
+      </div>
+    </form>
+    <br><br>
+    <b>SignIn Form</b>
+    <pre>{{ signInForm1.value | json }}</pre>
+  </div>
+  <div class="container__property-binding">
+    <form novalidate #signInForm2="ngForm" class="sign-in-form" (submit)="onSubmit2(signInForm2)">
+      <h2>
+        Sign in <br>
+        <em>Using [ngModel] to bind property to form</em>
+      </h2>
+      <div class="row-control">
+        <mat-form-field appearance="outline">
+          <mat-label>Username</mat-label>
+          <input matInput placeholder="Username" [ngModel]="userInfo.userName" name="username"/>
+        </mat-form-field>
+      </div>
+      <div class="row-control">
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input type="password" matInput placeholder="Password" [ngModel]="userInfo.password" ngModel name="password"/>
+        </mat-form-field>
+      </div>
+      <div class="row-control">
+        <mat-checkbox [ngModel]="userInfo.rememberMe" name="rememberMe">Remember me</mat-checkbox>
+      </div><br>
+      <div class="row-control row-actions">
+        <button mat-raised-button color="primary" type="submit">Sign in</button>
+      </div>
+    </form>
+    <br><br>
+    <b>userInfo</b>
+    <pre>{{ userInfo | json }}</pre>
+    <b>SignIn Form</b>
+    <pre>{{ signInForm2.value | json }}</pre>
+  </div>
+  <div class="container__two-way-binding">
+    <form novalidate #signInForm3="ngForm" class="sign-in-form" (submit)="onSubmit2(signInForm3)">
+      <h2>
+        Sign in <br>
+        <em>Using [ngModel] to bind property to form</em>
+      </h2>
+      <div class="row-control">
+        <mat-form-field appearance="outline">
+          <mat-label>Username</mat-label>
+          <input matInput placeholder="Username" [(ngModel)]="userInfo1.userName" name="username"/>
+        </mat-form-field>
+      </div>
+      <div class="row-control">
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input type="password" matInput placeholder="Password" [(ngModel)]="userInfo1.password" ngModel name="password"/>
+        </mat-form-field>
+      </div>
+      <div class="row-control">
+        <mat-checkbox [(ngModel)]="userInfo1.rememberMe" name="rememberMe">Remember me</mat-checkbox>
+      </div><br>
+      <div class="row-control row-actions">
+        <button mat-raised-button color="primary" type="submit">Sign in</button>
+      </div>
+    </form>
+    <br><br>
+    <b>userInfo</b>
+    <pre>{{ userInfo1 | json }}</pre>
+    <b>SignIn Form</b>
+    <pre>{{ signInForm3.value | json }}</pre>
+  </div>
+</div>
