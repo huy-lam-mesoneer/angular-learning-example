@@ -1,0 +1,135 @@
+
+<div class="container">
+  <div class="container__register-control">
+    <h2>FormControl</h2>
+    <div class="row-control">
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Name" [formControl]="name1"/>
+      </mat-form-field>
+    </div>
+    <div class="row-control">
+      <button mat-raised-button (click)="name1.markAsUntouched()">Mark untouched</button>
+      <button mat-raised-button (click)="name1.markAsTouched()">Mark touched</button>
+      <div>Name touched: {{ name1.touched }}</div>
+      </div>
+    <div class="row-control">
+      <button mat-raised-button (click)="name1.markAsDirty()">Mark dirty</button>
+      <button mat-raised-button (click)="name1.markAsPristine()">Mark pristine</button>
+      <div>Name dirty: {{ name1.dirty }}</div>
+    </div>
+    <div class="row-control">
+      <button mat-raised-button (click)="name1.disable()">Disable</button>
+      <button mat-raised-button (click)="name1.enable()">Enable</button>
+      <div>Name disabled: {{ name1.disabled }}</div>
+    </div>
+    <h2>FormGroup</h2>
+    <form [formGroup]="group1">
+      <div class="row-control">
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input matInput placeholder="Name" [formControl]="$any(group1.get('name'))"/>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Age</mat-label>
+          <input matInput placeholder="Age" type="number" [formControl]="$any(group1.get('age'))" />
+        </mat-form-field>
+      </div>
+      <div class="row-control">
+        <button mat-raised-button (click)="group1.markAllAsTouched()">Mark all as touched</button>
+        <button mat-raised-button (click)="group1.markAsUntouched()">Mark untouched</button>
+        <div>Name touched: {{ group1.get('name')?.touched }}</div>
+        <div>Age touched: {{ group1.get('age')?.touched }}</div>
+        <div>Group touched: {{ group1.touched }}</div>
+      </div>
+      <i> <strong>When mark FormGroup as dirty, each FormControl isn't marked. Try this</strong> </i> 
+      <div class="row-control">
+        <button mat-raised-button (click)="group1.markAsDirty()">Mark dirty</button>
+        <button mat-raised-button (click)="group1.markAsPristine()">Mark pristine</button>
+        <div>Name dirty: {{ group1.get('name')?.dirty }}</div>
+        <div>Age dirty: {{ group1.get('age')?.dirty }}</div>
+        <div>Age dirty: {{ group1?.dirty }}</div>
+      </div>
+      <div class="row-control">
+        <button mat-raised-button (click)="group1.disable()">Disable</button>
+        <button mat-raised-button (click)="group1.enable()">Enable</button>
+        <div>Name disabled: {{ group1.get('name')?.disabled }}</div>
+        <div>Age disabled: {{ group1.get('age')?.disabled }}</div>
+        <div>Age disabled: {{ group1?.disabled }}</div>
+      </div>
+    </form>
+    <h2>FormArray</h2>
+    <div class="row-control" *ngFor="let lesson of lessons; index as i">
+      <mat-form-field appearance="outline">
+        <mat-label>Lesson {{ i }}</mat-label>
+        <input matInput [formControl]="lesson"/>
+      </mat-form-field>
+    </div>
+    <div class="row-control">
+      <button mat-raised-button (click)="lessonControls.markAllAsTouched()">Mark all as touched</button>
+      <button mat-raised-button (click)="lessonControls.markAsUntouched()">Mark untouched</button>
+      <div>Lesson 0 touched: {{ lessons[0].touched }}</div>
+      <div>Lesson 1 touched: {{ lessons[1].touched }}</div>
+      <div>LessonControls touched: {{ lessonControls.touched }}</div>
+    </div>
+    <i> <strong>When mark FormArray as dirty, each FormControl isn't marked. Try this</strong> </i> 
+    <div class="row-control">
+      <button mat-raised-button (click)="lessonControls.markAsDirty()">Mark dirty</button>
+      <button mat-raised-button (click)="lessonControls.markAsPristine()">Mark pristine</button>
+      <div>Lesson 0 dirty: {{ lessons[0].dirty }}</div>
+      <div>Lesson 1 dirty: {{ lessons[1].dirty }}</div>
+      <div>Lessons dirty: {{ lessonControls.dirty }}</div>
+    </div>
+    <div class="row-control">
+      <button mat-raised-button (click)="lessonControls.disable()">Disable</button>
+      <button mat-raised-button (click)="lessonControls.enable()">Enable</button>
+      <div>Lesson 0 disabled: {{ lessons[0].disabled }}</div>
+      <div>Lesson 1 disabled: {{ lessons[1].disabled }}</div>
+      <div>Lessons disabled: {{ lessonControls.disabled }}</div>
+    </div>
+    <h2>Get FormData</h2>
+    <div class="row-control">
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input matInput [formControl]="$any(reactiveForm.get('name'))"/>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>id</mat-label>
+        <input matInput [formControl]="$any(reactiveForm.get('id'))"/>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>company</mat-label>
+        <input matInput [formControl]="$any(reactiveForm.get('company'))"/>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>email</mat-label>
+        <input matInput [formControl]="$any(reactiveForm.get('email'))"/>
+      </mat-form-field>
+    </div>
+    <div>The <strong>value</strong> property: {{reactiveForm.value | json}}</div> 
+    <div>The <strong>getRawValue()</strong> method: {{reactiveForm.getRawValue() | json}}</div>
+    <br>
+    <h2>Set FormData</h2>
+    <div class="row-control">
+      <pre>{{ tagsForm.value | json }}</pre>
+    </div>
+    <div class="row-control">
+      <p>Set <strong>website</strong> value</p>
+      <button mat-raised-button (click)="setWebsiteValue()">Set Website</button>
+      <p>Patch <strong>website</strong> value</p>
+      <button mat-raised-button (click)="patchWebsiteValue()">Patch Website</button>
+    </div>
+    <div class="row-control">
+      <p>Set <strong>tagsForm</strong> value</p>
+      <button mat-raised-button (click)="setTagsFormValue()">Set TagsForm</button>
+      <p>Patch <strong>tagsForm</strong> value</p>
+      <button mat-raised-button (click)="patchTagsFormValue()">Patch TagsForm</button>
+    </div>
+    <div class="row-control">
+      <p>Set <strong>tags</strong> value</p>
+      <button mat-raised-button (click)="setTagsValue()">Set TagsForm</button>
+      <p>Patch <strong>tags</strong> value</p>
+      <button mat-raised-button (click)="patchTagsValue()">Patch TagsForm</button>
+    </div>
+  </div>
+</div>
